@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:logi_track/color.dart';
 import '../widgets/viagem_atual_card.dart';
-import 'package:logi_track/pages/entregas_page.dart';
 import 'package:logi_track/widgets/scaffold_padrao.dart';
 
 class MainPage extends StatefulWidget {
+  final VoidCallback onGoToRomaneio;
+  const MainPage({super.key, required this.onGoToRomaneio});
+
   @override
-  _MainPage createState() => _MainPage();
+  _MainPage createState() => _MainPage(onGoToRomaneio: onGoToRomaneio);
 }
 
 class _MainPage extends State<MainPage> {
+  final VoidCallback onGoToRomaneio;
+  _MainPage({required this.onGoToRomaneio});
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       titulo: Text(
@@ -31,12 +37,7 @@ class _MainPage extends State<MainPage> {
             height: 55,
 
             child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => RomaneioPage()),
-                );
-              },
+              onPressed: onGoToRomaneio,
 
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,

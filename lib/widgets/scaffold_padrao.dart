@@ -7,6 +7,9 @@ class ScaffoldWidget extends StatelessWidget {
   final IconData? iconCanto;
   final Widget? child;
   final bool? acoes;
+  final Color? corIconCanto;
+  final Color? corIconAcoes;
+  final VoidCallback? onBack;
 
   const ScaffoldWidget({
     super.key,
@@ -15,6 +18,9 @@ class ScaffoldWidget extends StatelessWidget {
     this.iconCanto,
     this.child,
     this.acoes = false,
+    this.corIconAcoes,
+    this.corIconCanto,
+    this.onBack,
   });
 
   @override
@@ -28,14 +34,25 @@ class ScaffoldWidget extends StatelessWidget {
         title: titulo,
         centerTitle: tituloNoMeio,
         leading: iconCanto != null
-            ? Icon(iconCanto, size: 30, color: Cor.primaryColor)
+            ? IconButton(
+                icon: Icon(iconCanto),
+                iconSize: 35,
+                color: corIconCanto ?? Cor.primaryColor,
+                onPressed: () {
+                  if (onBack != null) {
+                    onBack!();
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              )
             : null,
         actions: acoes!
             ? [
                 Icon(
                   Icons.notifications_none_sharp,
                   size: 35,
-                  color: Cor.primaryColor,
+                  color: corIconAcoes ?? Cor.primaryColor,
                 ),
               ]
             : null,
@@ -62,12 +79,11 @@ class ScaffoldWidget extends StatelessWidget {
                 ),
               ),
 
-              if (child != null) child!,
+              ?child,
             ],
           ),
         ),
       ),
-      bottomNavigationBar: Card(),
     );
   }
 }

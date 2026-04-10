@@ -1,6 +1,8 @@
-import 'pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:logi_track/color.dart';
+import 'package:logi_track/pages/home_page.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
   @override
   _LoginPage createState() => _LoginPage();
 }
@@ -35,12 +38,12 @@ class _LoginPage extends State<LoginPage> {
   void validarCampos() {
     if (!formkey.currentState!.validate()) return;
     if (idVeiculoController.text.isEmpty ||
-        codigoMotoristaController.text.isEmpty)
-      return;
+        codigoMotoristaController.text.isEmpty)return;
+      
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => MainPage()),
+      MaterialPageRoute(builder: (_) => HomePage()),
     );
   }
 
